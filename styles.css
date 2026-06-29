@@ -109,6 +109,31 @@ p {
   background: var(--paper);
 }
 
+.has-reveal .reveal-section {
+  opacity: 0;
+  transform: translateY(34px);
+  transition: opacity 620ms ease, transform 620ms ease;
+  will-change: opacity, transform;
+}
+
+.has-reveal .reveal-section.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.has-reveal .reveal-card {
+  opacity: 0;
+  transform: translateY(22px) scale(0.985);
+  transition: opacity 520ms ease, transform 520ms ease, border-color 180ms ease, box-shadow 180ms ease;
+  transition-delay: var(--reveal-delay, 0ms);
+  will-change: opacity, transform;
+}
+
+.has-reveal .reveal-card.is-visible {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
 .offwhite {
   background: var(--paper-soft);
 }
@@ -120,12 +145,13 @@ p {
   background: rgba(17, 16, 14, 0.9);
   border-bottom: 1px solid rgba(255, 255, 255, 0.08);
   backdrop-filter: blur(18px);
-  transition: transform 220ms ease;
+  transition: transform 260ms ease, opacity 260ms ease;
   will-change: transform;
 }
 
 .site-header.is-hidden {
   transform: translateY(-100%);
+  opacity: 0;
 }
 
 .nav {
@@ -579,8 +605,8 @@ p {
 
 .split-panel {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 0.74fr);
-  gap: 34px;
+  grid-template-columns: minmax(0, 0.92fr) minmax(0, 0.88fr);
+  gap: 24px;
   align-items: center;
   padding: 34px;
   background: var(--paper-soft);
@@ -597,7 +623,7 @@ p {
   display: grid;
   gap: 12px;
   width: 100%;
-  max-width: 430px;
+  max-width: 520px;
   justify-self: end;
 }
 
@@ -1400,6 +1426,21 @@ p {
   margin-top: 0;
 }
 
+.form-note {
+  min-height: 1.4em;
+  margin: 0;
+  color: rgba(252, 248, 239, 0.76);
+  font-size: 0.95rem;
+}
+
+.form-note.is-success {
+  color: var(--gold-soft);
+}
+
+.form-note.is-error {
+  color: #ff8a8a;
+}
+
 .contact-brief {
   display: grid;
   grid-template-columns: repeat(5, minmax(0, 1fr));
@@ -1835,7 +1876,7 @@ p {
   }
 
   .positioning-media {
-    max-width: 560px;
+    max-width: 620px;
     justify-self: start;
   }
 
@@ -2093,5 +2134,19 @@ p {
   .process-step,
   .receive-grid article {
     min-height: auto;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .site-header,
+  .has-reveal .reveal-section,
+  .has-reveal .reveal-card {
+    transition: none;
+  }
+
+  .has-reveal .reveal-section,
+  .has-reveal .reveal-card {
+    opacity: 1;
+    transform: none;
   }
 }

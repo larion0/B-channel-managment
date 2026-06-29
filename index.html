@@ -283,7 +283,7 @@
             </div>
             <!-- Generated case board -->
             <figure class="case-board">
-              <img src="assets/generated-case-delivery.jpg" width="1200" height="675" loading="lazy" alt="Generated case board for a channel visual delivery system">
+              <img src="assets/generated-checklist.jpg" width="1200" height="675" loading="lazy" alt="Generated upload checklist board for organized channel visual delivery">
             </figure>
           </article>
         </div>
@@ -563,7 +563,7 @@
           <p class="direct-email">Direct email: <a href="mailto:bchannelmanagement@proton.me">bchannelmanagement@proton.me</a></p>
         </div>
 
-        <form class="contact-form" action="mailto:bchannelmanagement@proton.me" method="post" enctype="text/plain">
+        <form class="contact-form" id="contact-email-form">
           <label>
             Your Name
             <input type="text" name="name" required>
@@ -577,6 +577,7 @@
             <textarea name="project" rows="7" required></textarea>
           </label>
           <button class="button primary contact-submit" type="submit">Send Message</button>
+          <p class="form-note" id="contact-form-status" aria-live="polite"></p>
         </form>
       </div>
     </section>
