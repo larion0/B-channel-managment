@@ -84,39 +84,34 @@ const revealCards = document.querySelectorAll([
   ".faq-list details"
 ].join(","));
 
-if ("IntersectionObserver" in window) {
-  const sectionObserver = new IntersectionObserver((entries) => {
-    entries.forEach((entry) => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add("is-visible");
-        sectionObserver.unobserve(entry.target);
-      }
-    });
-  }, { threshold: 0.12, rootMargin: "0px 0px -8% 0px" });
+revealSections.forEach((section) => section.classList.add("reveal-section"));
+revealCards.forEach((card, index) => {
+  card.classList.add("reveal-card");
+  card.style.setProperty("--reveal-delay", `${Math.min((index % 8) * 32, 190)}ms`);
+});
+
+function revealEarly() {
+  const earlyLine = window.innerHeight * 1.35;
+  const cardEarlyLine = window.innerHeight * 1.25;
 
   revealSections.forEach((section) => {
-    section.classList.add("reveal-section");
-    sectionObserver.observe(section);
+    if (section.classList.contains("is-visible")) return;
+    if (section.getBoundingClientRect().top < earlyLine) {
+      section.classList.add("is-visible");
+    }
   });
 
-  const cardObserver = new IntersectionObserver((entries) => {
-    entries.forEach((entry) => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add("is-visible");
-        cardObserver.unobserve(entry.target);
-      }
-    });
-  }, { threshold: 0.16, rootMargin: "0px 0px -6% 0px" });
-
-  revealCards.forEach((card, index) => {
-    card.classList.add("reveal-card");
-    card.style.setProperty("--reveal-delay", `${Math.min((index % 8) * 65, 390)}ms`);
-    cardObserver.observe(card);
+  revealCards.forEach((card) => {
+    if (card.classList.contains("is-visible")) return;
+    if (card.getBoundingClientRect().top < cardEarlyLine) {
+      card.classList.add("is-visible");
+    }
   });
-} else {
-  revealSections.forEach((section) => section.classList.add("is-visible"));
-  revealCards.forEach((card) => card.classList.add("is-visible"));
 }
+
+revealEarly();
+window.addEventListener("scroll", revealEarly, { passive: true });
+window.addEventListener("resize", revealEarly);
 
 const briefForm = document.querySelector("#channel-brief-form");
 const contactEmailForm = document.querySelector("#contact-email-form");

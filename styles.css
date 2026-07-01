@@ -1297,7 +1297,7 @@ p {
 
 .about-grid {
   display: grid;
-  grid-template-columns: minmax(260px, 0.72fr) minmax(0, 1.28fr);
+  grid-template-columns: minmax(240px, 0.62fr) minmax(0, 1.38fr);
   gap: 44px;
   align-items: center;
 }
@@ -1317,6 +1317,21 @@ p {
   width: 100%;
   height: 100%;
   object-fit: cover;
+}
+
+.about-profile {
+  width: min(100%, 380px);
+  justify-self: center;
+  padding: 10px;
+  background:
+    linear-gradient(135deg, rgba(196, 163, 95, 0.28), transparent 34%),
+    #11100e;
+  border-color: rgba(196, 163, 95, 0.34);
+}
+
+.about-profile img {
+  border-radius: calc(var(--radius) - 8px);
+  object-position: center top;
 }
 
 .contact-section {
